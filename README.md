@@ -15,12 +15,14 @@ Install stable and development releases via Nuget;
 | `NetCoreGlow`         | [![NuGet](https://img.shields.io/nuget/v/NetCoreGlow.svg)](https://www.nuget.org/packages/NetCoreGlow/)| [![NuGet](https://img.shields.io/nuget/vpre/NetCoreGlow.svg)](https://www.nuget.org/packages/NetCoreGlow/)|
 
 ## Getting Started 
- 1. First you need to decide on what version of OpenGL you want to target, and what size your window should be then call
+ 1. First you need to make sure the [GLFW](https://www.glfw.org/) library is available from the program's working directory
+ 
+ 2. Then you need to decide on what version of OpenGL you want to target, and what size your window should be then call
  ```c#
  GL.Initialise(OpenGLMajorVersion, OpenGLMinorVersion, WindowWidth, WindowHeight)
  ```
  
- 2. Then you can access the bindings for that version of OpenGL via:
+ 3. Then you can access the bindings for that version of OpenGL via:
  ```c#
  GL.GL<OpenGLMajorVersion><OpenGLMinorVersion>
  ```
