@@ -1,0 +1,37 @@
+# Only trigger CI builds for the master branch, instead 
+# of every branch. You'll automatically be configured to 
+# build PRs, but you can't currently control that from the YAML directly
+# For details, see https://docs.microsoft.com/en-us/azure/devops/pipelines/build/triggers
+trigger:
+- master
+
+# We can run multiple jobs in parallel. For this project
+# I'm running Linux, Windows, and macOS jobs. For syntac details
+# see https://docs.microsoft.com/en-us/azure/devops/pipelines/process/phases
+jobs:
+
+# Provide a name for the job
+- job: Linux
+
+  # The VM image to use for the hosted agent. For a list of possible agents
+  # see https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted
+  # You can see the software installed on each agent at the same link.
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - bash: dotnet build
+
+# Run a build on macOS at the same time
+- job: macOS
+  pool:
+    vmImage: 'xcode9-macos10.13'
+  steps:
+  - bash: dotnet build
+
+# Run a build on Windows at the same time
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - powershell: dotnet build
+
