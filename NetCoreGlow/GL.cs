@@ -61,7 +61,7 @@ namespace NetCoreGlow
 
         public static T GetMethod<T>()
         {
-            var funcPtr = GetProcAddress(typeof(T).Name.Split("`")[0]);
+            var funcPtr = GetProcAddress(typeof(T).Name.Split('`')[0]);
             if (funcPtr == IntPtr.Zero)
             {
                 Console.WriteLine($"Unable to load Function Pointer: {typeof(T).Name}");
