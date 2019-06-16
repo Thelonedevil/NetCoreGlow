@@ -10,9 +10,9 @@
 
 Install stable and development releases via Nuget;
 
-| Package Name                   | Release (NuGet) | 
-|--------------------------------|-----------------|
-| `NetCoreGlow`         | [![NuGet](https://img.shields.io/nuget/v/NetCoreGlow.svg)](https://www.nuget.org/packages/NetCoreGlow/)|
+| Package Name                   | Release (NuGet) | Dev (NuGet) |
+|--------------------------------|-----------------|-------------|
+| `NetCoreGlow`         | [![NuGet](https://img.shields.io/nuget/v/NetCoreGlow.svg)](https://www.nuget.org/packages/NetCoreGlow/)| [![NuGet](https://img.shields.io/nuget/vpre/NetCoreGlow.svg)](https://www.nuget.org/packages/NetCoreGlow/)|
 
 ## Getting Started 
  1. First you need to decide on what version of OpenGL you want to target, and what size your window should be then call
