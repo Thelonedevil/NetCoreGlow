@@ -52,29 +52,30 @@ namespace NetCoreGlow
             var field = typeof(GL).GetField("GL" + majorVersion.ToString() + minorVersion.ToString(), System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
             if(field == null)
             {
-                throw new UnsupportedNetCoreGlowVersion(majorVersion + "." + minorVersion);
+                throw new UnsupportedOpenGLVersionException(majorVersion + "." + minorVersion);
             }
             field.SetValue(null, Activator.CreateInstance(field.FieldType));
             ((IFunctionPointerHolder)field.GetValue(null)).LoadFunctionPointers();
             return window;
         }
 
-        public static T GetMethod<T>()
+        public static T GetMethod<T>() where T : Delegate
         {
             var funcPtr = GetProcAddress(typeof(T).Name.Split('`')[0]);
             if (funcPtr == IntPtr.Zero)
             {
                 Console.WriteLine($"Unable to load Function Pointer: {typeof(T).Name}");
-                return default(T);
+                return default;
             }
             return Marshal.GetDelegateForFunctionPointer<T>(funcPtr);
         }
     }
-    public class UnsupportedNetCoreGlowVersion : Exception
+    public class UnsupportedOpenGLVersionException : NotSupportedException
     {
-        public UnsupportedNetCoreGlowVersion(string version)
+        public string Version { get; set; }
+        public UnsupportedOpenGLVersionException(string version) : base($"Version {version} of OpenGL is not supported by this version of NetCoreGlow")
         {
-
+            Version = version;
         }
     }
     public interface IFunctionPointerHolder
